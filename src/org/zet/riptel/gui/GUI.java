@@ -558,7 +558,7 @@ public class GUI extends javax.swing.JFrame {
                         }
                     }
                     txtSys.append(file.getAbsolutePath() + "\n");
-                    ipList.clear();
+                    //ipList.clear();
                 }
                 return null;
             }
