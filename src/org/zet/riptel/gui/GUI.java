@@ -705,6 +705,8 @@ public class GUI extends javax.swing.JFrame {
             } catch (Exception x) {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, x);
             }
+        } else {
+            JOptionPane.showMessageDialog(jP_DBcon, "No DB connection !");
         }
     }//GEN-LAST:event_jB_DBSubmitActionPerformed
     /*
