@@ -750,17 +750,21 @@ cb_DBIPs.addItem("192.168.1.254");
         if (isPrvMode()) {
             try {
                 String[] nMapCmd = {nmScriptPath, tmpIp, "1"};
-                String disp_str;
+                String displ_str;
 
                 Process proc = Runtime.getRuntime().exec(nMapCmd);
 
-                DataInputStream in = new DataInputStream(
-                        proc.getInputStream());
-
-                while ((disp_str = in.readLine()) != null) {
-                    jTxt_nmap.append(disp_str + "\n");
+                BufferedReader stdIn = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+                BufferedReader stdEr = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
+ 
+                while((displ_str = stdIn.readLine()) != null){
+                    jTxt_telOut.append(displ_str + "\n");
                     stateDBbuttons(false);
-                }
+                }                
+                while ((displ_str = stdEr.readLine()) != null){
+                    txtSys.append("*** nMap returned Error: "+ displ_str + "\n");
+                }                
+                
             } catch (IOException ex) {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -784,17 +788,20 @@ cb_DBIPs.addItem("192.168.1.254");
         } else if ((!isPrvMode()) && !("".toString().equals(pass_sudo.getText()))) {
             try {
                 String[] nMapCmd = {nmScriptPath, tmpIp, "0", pwd}; //pass??
-                String disp_str;
+                String displ_str;
 
                 Process proc = Runtime.getRuntime().exec(nMapCmd);
 
-                DataInputStream in = new DataInputStream(
-                        proc.getInputStream());
-
-                while ((disp_str = in.readLine()) != null) {
-                    jTxt_nmap.append(disp_str + "\n");
+                BufferedReader stdIn = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+                BufferedReader stdEr = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
+ 
+                while((displ_str = stdIn.readLine()) != null){
+                    jTxt_telOut.append(displ_str + "\n");
                     stateDBbuttons(false);
-                }
+                }                
+                while ((displ_str = stdEr.readLine()) != null){
+                    txtSys.append("*** nMap returned Error: "+ displ_str + "\n");
+                }                
             } catch (IOException ex) {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -827,10 +834,10 @@ cb_DBIPs.addItem("192.168.1.254");
             @Override
             protected Void doInBackground() throws Exception {
 
-                //String telScriptPath = getJarPath() + "/scripts/zettel.sh";
+                String telScriptPath = getJarPath() + "/scripts/zettel.sh";
                 String tmpIp = cb_DBIPs.getSelectedItem().toString();
 
-                String telScriptPath = "/home/zet/proj/NetBeansProjects/RTL/resources/scripts/zettel.sh";
+                //String telScriptPath = "/home/zet/proj/NetBeansProjects/RTL/resources/scripts/zettel.sh";
                 //String tmpIp = "192.168.1.254";
                  
                 String[] execTelStr = {"gnome-terminal",
