@@ -859,7 +859,7 @@ public class GUI extends javax.swing.JFrame {
                 }                
                 while ((displ_str = stdEr.readLine()) != null){
                     txtSys.append("*** TelNet [" + tmpIp + "] Error: " + displ_str + "\n");
-                }                
+                }            
                 
                 //******** Add 60 seconds timeout then close proc
                 
