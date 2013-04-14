@@ -624,16 +624,17 @@
                                       <Component id="jTF_Pass" min="-2" pref="115" max="-2" attributes="0"/>
                                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="0" pref="141" max="32767" attributes="0"/>
                               </Group>
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="1" attributes="0">
                                   <Component id="jB_Nmap" linkSize="10" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="btn_Tel" linkSize="10" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="jB_DBSubmit" linkSize="10" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="124" max="-2" attributes="0"/>
+                                  <Component id="lb_infoStatus" min="-2" pref="158" max="-2" attributes="0"/>
                               </Group>
                           </Group>
+                          <EmptySpace pref="88" max="32767" attributes="0"/>
+                          <Component id="jB_DBSubmit" linkSize="10" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -652,12 +653,15 @@
                               <Component id="jTF_Pass" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jB_Nmap" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jB_DBSubmit" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="btn_Tel" linkSize="11" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jB_Nmap" linkSize="11" max="32767" attributes="0"/>
+                                  <Component id="jB_DBSubmit" linkSize="11" max="32767" attributes="0"/>
+                                  <Component id="btn_Tel" linkSize="11" max="32767" attributes="0"/>
+                              </Group>
+                              <Component id="lb_infoStatus" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -711,6 +715,8 @@
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_TelActionPerformed"/>
                   </Events>
+                </Component>
+                <Component class="javax.swing.JLabel" name="lb_infoStatus">
                 </Component>
               </SubComponents>
             </Container>
