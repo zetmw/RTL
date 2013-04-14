@@ -621,7 +621,7 @@ public class GUI extends javax.swing.JFrame {
                 checkPrvMode();
 
                 //setnMapCmd(prepareNmapCmd(isPrvMode()));
-cb_DBIPs.addItem("192.168.1.254");
+                //cb_DBIPs.addItem("192.168.1.254");
                 connDB();
                 int ttl, th = 0;
 
@@ -758,7 +758,7 @@ cb_DBIPs.addItem("192.168.1.254");
                 BufferedReader stdEr = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
  
                 while((displ_str = stdIn.readLine()) != null){
-                    jTxt_telOut.append(displ_str + "\n");
+                    jTxt_nmap.append(displ_str + "\n");
                     stateDBbuttons(false);
                 }                
                 while ((displ_str = stdEr.readLine()) != null){
@@ -768,8 +768,8 @@ cb_DBIPs.addItem("192.168.1.254");
             } catch (IOException ex) {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else if ((!isPrvMode()) && ("".toString().equals(pass_sudo.getText()))) {
-            try {
+        } else if ((!isPrvMode()) && ("".toString().equals(pass_sudo.getText()))) {   //***** Original
+            try {   
                 String[] nMapCmd = {nmScriptPath, tmpIp, "-1"};
                 String disp_str;
 
@@ -796,7 +796,7 @@ cb_DBIPs.addItem("192.168.1.254");
                 BufferedReader stdEr = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
  
                 while((displ_str = stdIn.readLine()) != null){
-                    jTxt_telOut.append(displ_str + "\n");
+                    jTxt_nmap.append(displ_str + "\n");
                     stateDBbuttons(false);
                 }                
                 while ((displ_str = stdEr.readLine()) != null){
@@ -822,7 +822,6 @@ cb_DBIPs.addItem("192.168.1.254");
                 return null;
             }
         }
-
         jTxt_nmap.setText("");
         cmdNwork = new CMDNWorker();
         SWNExecutor.getInstance().execute(cmdNwork);
@@ -859,10 +858,10 @@ cb_DBIPs.addItem("192.168.1.254");
                     jTxt_telOut.append(displ_str + "\n");
                 }                
                 while ((displ_str = stdEr.readLine()) != null){
-                    txtSys.append("*** TelNet returned Error: "+ displ_str + "\n");
+                    txtSys.append("*** TelNet [" + tmpIp + "] Error: " + displ_str + "\n");
                 }                
                 
-                
+                //******** Add 60 seconds timeout then close proc
                 
                /* 
                 DataInputStream in = new DataInputStream(
