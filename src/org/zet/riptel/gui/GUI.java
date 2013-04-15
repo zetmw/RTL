@@ -109,6 +109,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         btn_Tel = new javax.swing.JButton();
         lb_infoStatus = new javax.swing.JLabel();
+        chb_liveTel = new javax.swing.JCheckBox();
 
         jD_DBcon.getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
@@ -353,7 +354,7 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(rdbC, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rdbFR)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pan_controlLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {rdbA, rdbB, rdbC, rdbFR});
@@ -384,7 +385,7 @@ public class GUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jP_MainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(pan_Main, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSP_sstxt, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jSP_sstxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(pan_control, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -451,6 +452,8 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        chb_liveTel.setText("LiveTel");
+
         javax.swing.GroupLayout jP_DBcontrolLayout = new javax.swing.GroupLayout(jP_DBcontrol);
         jP_DBcontrol.setLayout(jP_DBcontrolLayout);
         jP_DBcontrolLayout.setHorizontalGroup(
@@ -458,25 +461,23 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(jP_DBcontrolLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addGroup(jP_DBcontrolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cb_DBIPs, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
                     .addGroup(jP_DBcontrolLayout.createSequentialGroup()
-                        .addGroup(jP_DBcontrolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cb_DBIPs, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addGap(18, 18, 18)
-                        .addGroup(jP_DBcontrolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTF_User, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jP_DBcontrolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTF_Pass, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jP_DBcontrolLayout.createSequentialGroup()
                         .addComponent(jB_Nmap)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_Tel)
-                        .addGap(124, 124, 124)
-                        .addComponent(lb_infoStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                        .addComponent(btn_Tel)))
+                .addGap(18, 18, 18)
+                .addGroup(jP_DBcontrolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jTF_User, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+                    .addComponent(jLabel5)
+                    .addComponent(lb_infoStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jP_DBcontrolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTF_Pass, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(chb_liveTel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jB_DBSubmit))
         );
 
@@ -495,12 +496,14 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(jTF_User, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTF_Pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jP_DBcontrolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jP_DBcontrolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jB_Nmap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jB_DBSubmit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_Tel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(lb_infoStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jP_DBcontrolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jP_DBcontrolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jP_DBcontrolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jB_Nmap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jB_DBSubmit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btn_Tel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(lb_infoStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(chb_liveTel))
                 .addContainerGap())
         );
 
@@ -510,12 +513,12 @@ public class GUI extends javax.swing.JFrame {
         jP_DBEntry.setLayout(jP_DBEntryLayout);
         jP_DBEntryLayout.setHorizontalGroup(
             jP_DBEntryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSP_telout, javax.swing.GroupLayout.DEFAULT_SIZE, 545, Short.MAX_VALUE)
+            .addComponent(jSP_telout, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jP_DBEntryLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jP_DBcontrol, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(jSP_nmap)
+            .addComponent(jSP_nmap, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jP_DBEntryLayout.setVerticalGroup(
             jP_DBEntryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -617,7 +620,7 @@ public class GUI extends javax.swing.JFrame {
             @Override
             protected Void doInBackground() throws Exception {
 
-                txtSys.setText("** " + worker.getState().toString() + " @ " + getDateTime() + "\n");
+                txtSys.setText("* " + worker.getState().toString() + " @ " + getDateTime() + "\n");
                 checkPrvMode();
 
                 //setnMapCmd(prepareNmapCmd(isPrvMode()));
@@ -669,7 +672,7 @@ public class GUI extends javax.swing.JFrame {
 
             @Override
             protected void done() {
-                txtSys.append("** " + worker.getState().toString() + " @ " + getDateTime() + "\n");
+                txtSys.append("* " + worker.getState().toString() + " @ " + getDateTime() + "\n");
                 txtSys.setCaretPosition(txtSys.getText().length());
                 btnStart.setEnabled(true);
                 btnStop.setEnabled(false);
@@ -756,20 +759,20 @@ public class GUI extends javax.swing.JFrame {
 
                 BufferedReader stdIn = new BufferedReader(new InputStreamReader(proc.getInputStream()));
                 BufferedReader stdEr = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
- 
-                while((displ_str = stdIn.readLine()) != null){
+
+                while ((displ_str = stdIn.readLine()) != null) {
                     jTxt_nmap.append(displ_str + "\n");
                     stateDBbuttons(false);
-                }                
-                while ((displ_str = stdEr.readLine()) != null){
-                    txtSys.append("*** nMap returned Error: "+ displ_str + "\n");
-                }                
-                
+                }
+                while ((displ_str = stdEr.readLine()) != null) {
+                    txtSys.append("*** nMap returned Error: " + displ_str + "\n");
+                }
+
             } catch (IOException ex) {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if ((!isPrvMode()) && ("".toString().equals(pass_sudo.getText()))) {   //***** Original
-            try {   
+            try {
                 String[] nMapCmd = {nmScriptPath, tmpIp, "-1"};
                 String disp_str;
 
@@ -794,14 +797,14 @@ public class GUI extends javax.swing.JFrame {
 
                 BufferedReader stdIn = new BufferedReader(new InputStreamReader(proc.getInputStream()));
                 BufferedReader stdEr = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
- 
-                while((displ_str = stdIn.readLine()) != null){
+
+                while ((displ_str = stdIn.readLine()) != null) {
                     jTxt_nmap.append(displ_str + "\n");
                     stateDBbuttons(false);
-                }                
-                while ((displ_str = stdEr.readLine()) != null){
-                    txtSys.append("*** nMap returned Error: "+ displ_str + "\n");
-                }                
+                }
+                while ((displ_str = stdEr.readLine()) != null) {
+                    txtSys.append("*** nMap returned Error: " + displ_str + "\n");
+                }
             } catch (IOException ex) {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -833,48 +836,65 @@ public class GUI extends javax.swing.JFrame {
             @Override
             protected Void doInBackground() throws Exception {
 
+                String displ_str;
+                int exitValue;
+
                 String telScriptPath = getJarPath() + "/scripts/zettel.sh";
                 String tmpIp = cb_DBIPs.getSelectedItem().toString();
 
                 //String telScriptPath = "/home/zet/proj/NetBeansProjects/RTL/resources/scripts/zettel.sh";
                 //String tmpIp = "192.168.1.254";
-                 
-                String[] execTelStr = {"gnome-terminal",
-                    "-x",
-                    "telnet",
-                    tmpIp
-                };
-                Process procLive = Runtime.getRuntime().exec(execTelStr);     
 
-                String[] execTelScriptStr = {telScriptPath, tmpIp};
-                String displ_str;
+                if (chb_liveTel.isSelected()) {
+                    String[] execTelStr = {"gnome-terminal",
+                        "-x",
+                        "telnet",
+                        tmpIp
+                    };
+                    //Process procLive = Runtime.getRuntime().exec(execTelStr);
+                    ProcessBuilder pb = new ProcessBuilder(execTelStr);
+                    Process procLive = pb.start();
+                    //exitValue = procLive.waitFor();
+                    cancelWorker(cmdTwork);
+                    stateDBbuttons(true);
+                    return null;
 
-                Process procApp = Runtime.getRuntime().exec(execTelScriptStr);
-                
-                BufferedReader stdIn = new BufferedReader(new InputStreamReader(procApp.getInputStream()));
-                BufferedReader stdEr = new BufferedReader(new InputStreamReader(procApp.getErrorStream()));
- 
-                while((displ_str = stdIn.readLine()) != null){
-                    jTxt_telOut.append(displ_str + "\n");
-                }                
-                while ((displ_str = stdEr.readLine()) != null){
-                    txtSys.append("*** TelNet [" + tmpIp + "] Error: " + displ_str + "\n");
-                }            
-                
-                //******** Add 60 seconds timeout then close proc
-                
-               /* 
-                DataInputStream in = new DataInputStream(
-                        procApp.getInputStream());
+                } else {
 
-                while ((disp_str = in.readLine()) != null) { //read chars ???
-                    jTxt_telOut.append(disp_str + "\n");
-                   /* Thread.sleep(500);
-                    stateDBbuttons(false); */
-                
-                cancelWorker(cmdTwork);
-                stateDBbuttons(true);
-                return null;
+                    String[] execTelScriptStr = {telScriptPath, tmpIp};
+                    ProcessBuilder pb = new ProcessBuilder(execTelScriptStr);
+                    Process procApp = pb.start();
+
+                    //Process procApp = Runtime.getRuntime().exec(execTelScriptStr);
+
+                    BufferedReader stdIn = new BufferedReader(new InputStreamReader(procApp.getInputStream()));
+                    BufferedReader stdEr = new BufferedReader(new InputStreamReader(procApp.getErrorStream()));
+
+                    while ((displ_str = stdIn.readLine()) != null) {
+                        jTxt_telOut.append(displ_str + "\n");
+                    }
+                    while ((displ_str = stdEr.readLine()) != null) {
+                        txtSys.append("*** TelNet [" + tmpIp + "] Error: " + displ_str + "\n");
+                    }
+                    
+                    exitValue = procApp.waitFor();
+                    txtSys.append("** TelNet [" + tmpIp + "] exit Value is " + exitValue);
+
+                    //******** Add 60 seconds timeout then close proc
+
+                    /* 
+                     DataInputStream in = new DataInputStream(
+                     procApp.getInputStream());
+
+                     while ((disp_str = in.readLine()) != null) { //read chars ???
+                     jTxt_telOut.append(disp_str + "\n");
+                     /* Thread.sleep(500);
+                     stateDBbuttons(false); */
+
+                    cancelWorker(cmdTwork);
+                    stateDBbuttons(true);
+                    return null;
+                }
             }
         }
         jTxt_telOut.setText("");
@@ -1030,6 +1050,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton btn_Tel;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox cb_DBIPs;
+    private javax.swing.JCheckBox chb_liveTel;
     private javax.swing.JButton jB_DBSubmit;
     private javax.swing.JButton jB_Nmap;
     private javax.swing.JCheckBox jChk_DB;
