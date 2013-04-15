@@ -624,7 +624,7 @@ public class GUI extends javax.swing.JFrame {
                 checkPrvMode();
 
                 //setnMapCmd(prepareNmapCmd(isPrvMode()));
-                //cb_DBIPs.addItem("192.168.1.254");
+                cb_DBIPs.addItem("192.168.1.254");
                 connDB();
                 int ttl, th = 0;
 
@@ -741,73 +741,45 @@ public class GUI extends javax.swing.JFrame {
      }
      */
 
-    private void execNmapCmd() {
+    private void prepareNmapCmd() {
 
-        /*      String nmScriptPath = "/home/zet/proj/NetBeansProjects/RTL/resources/zetnm.sh";
-         String tmpIp = "192.168.1.254";
-         */
+        /*String nmScriptPath = "/home/zet/projects/NetBeansProjects/RTL/resources/scripts/zetnm.sh";
+         String tmpIp = "192.168.1.254";*/
+
         String nmScriptPath = getJarPath() + "/scripts/zetnm.sh";
         String tmpIp = cb_DBIPs.getSelectedItem().toString();
         String pwd = pass_sudo.getText();
 
         if (isPrvMode()) {
-            try {
-                String[] nMapCmd = {nmScriptPath, tmpIp, "1"};
-                String displ_str;
-
-                Process proc = Runtime.getRuntime().exec(nMapCmd);
-
-                BufferedReader stdIn = new BufferedReader(new InputStreamReader(proc.getInputStream()));
-                BufferedReader stdEr = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
-
-                while ((displ_str = stdIn.readLine()) != null) {
-                    jTxt_nmap.append(displ_str + "\n");
-                    stateDBbuttons(false);
-                }
-                while ((displ_str = stdEr.readLine()) != null) {
-                    txtSys.append("*** nMap returned Error: " + displ_str + "\n");
-                }
-
-            } catch (IOException ex) {
-                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else if ((!isPrvMode()) && ("".toString().equals(pass_sudo.getText()))) {   //***** Original
-            try {
-                String[] nMapCmd = {nmScriptPath, tmpIp, "-1"};
-                String disp_str;
-
-                Process proc = Runtime.getRuntime().exec(nMapCmd);
-
-                DataInputStream in = new DataInputStream(
-                        proc.getInputStream());
-
-                while ((disp_str = in.readLine()) != null) {
-                    jTxt_nmap.append(disp_str + "\n");
-                    stateDBbuttons(false);
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            String[] nMapCmd = {nmScriptPath, tmpIp, "1"};
+            execNmapCmd(nMapCmd);
+        } else if ((!isPrvMode()) && ("".toString().equals(pass_sudo.getText()))) { //***** Original
+            String[] nMapCmd = {nmScriptPath, tmpIp, "-1"};
+            execNmapCmd(nMapCmd);
         } else if ((!isPrvMode()) && !("".toString().equals(pass_sudo.getText()))) {
-            try {
-                String[] nMapCmd = {nmScriptPath, tmpIp, "0", pwd}; //pass??
-                String displ_str;
+            String[] nMapCmd = {nmScriptPath, tmpIp, "0", pwd}; //pass?? 
+            execNmapCmd(nMapCmd);
+        }
+    }
 
-                Process proc = Runtime.getRuntime().exec(nMapCmd);
+    private void execNmapCmd(String[] nMapCmd) {
+        try {
+            String displ_str;
 
-                BufferedReader stdIn = new BufferedReader(new InputStreamReader(proc.getInputStream()));
-                BufferedReader stdEr = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
+            Process proc = Runtime.getRuntime().exec(nMapCmd);
 
-                while ((displ_str = stdIn.readLine()) != null) {
-                    jTxt_nmap.append(displ_str + "\n");
-                    stateDBbuttons(false);
-                }
-                while ((displ_str = stdEr.readLine()) != null) {
-                    txtSys.append("*** nMap returned Error: " + displ_str + "\n");
-                }
-            } catch (IOException ex) {
-                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            BufferedReader stdIn = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+            BufferedReader stdEr = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
+
+            while ((displ_str = stdIn.readLine()) != null) {
+                jTxt_nmap.append(displ_str + "\n");
+                stateDBbuttons(false);
             }
+            while ((displ_str = stdEr.readLine()) != null) {
+                txtSys.append("*** nMap returned Error: " + displ_str + "\n");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -817,7 +789,7 @@ public class GUI extends javax.swing.JFrame {
             @Override
             protected Void doInBackground() throws Exception {
 
-                execNmapCmd();
+                prepareNmapCmd();
 
                 cancelWorker(cmdNwork);
                 stateDBbuttons(true);
@@ -876,7 +848,7 @@ public class GUI extends javax.swing.JFrame {
                     while ((displ_str = stdEr.readLine()) != null) {
                         txtSys.append("*** TelNet [" + tmpIp + "] Error: " + displ_str + "\n");
                     }
-                    
+
                     exitValue = procApp.waitFor();
                     txtSys.append("** TelNet [" + tmpIp + "] exit Value is " + exitValue);
 
