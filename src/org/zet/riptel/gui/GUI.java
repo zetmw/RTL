@@ -757,7 +757,7 @@ public class GUI extends javax.swing.JFrame {
             String[] nMapCmd = {nmScriptPath, tmpIp, "-1"};
             execNmapCmd(nMapCmd);
         } else if ((!isPrvMode()) && !("".toString().equals(pass_sudo.getText()))) {
-            String[] nMapCmd = {nmScriptPath, tmpIp, "0", pwd}; //pass?? 
+            String[] nMapCmd = {nmScriptPath, tmpIp, "0", pwd}; 
             execNmapCmd(nMapCmd);
         }
     }
@@ -836,8 +836,6 @@ public class GUI extends javax.swing.JFrame {
                     String[] execTelScriptStr = {telScriptPath, tmpIp};
                     ProcessBuilder pb = new ProcessBuilder(execTelScriptStr);
                     Process procApp = pb.start();
-
-                    //Process procApp = Runtime.getRuntime().exec(execTelScriptStr);
 
                     BufferedReader stdIn = new BufferedReader(new InputStreamReader(procApp.getInputStream()));
                     BufferedReader stdEr = new BufferedReader(new InputStreamReader(procApp.getErrorStream()));
