@@ -72,7 +72,7 @@ public class RIPT extends Thread {
              socket.close();                    
         } catch (IOException ex) {
             setConStatus(false);
-            Logger.getLogger(RIPT.class.getName()).log(Level.INFO, null, ex);
+            Logger.getLogger(RIPT.class.getName()).log(Level.SEVERE, null, ex);
         }
                
     }
