@@ -736,17 +736,17 @@ public class GUI extends javax.swing.JFrame {
 
         if (isPrvMode()) {
             String[] nMapCmd = {nmScriptPath, tmpIp, "1"};
-            execNmapCmd(nMapCmd);
+            execNmapCmd(nMapCmd, tmpIp);
         } else if ((!isPrvMode()) && ("".toString().equals(pass_sudo.getText()))) { //***** Original
             String[] nMapCmd = {nmScriptPath, tmpIp, "-1"};
-            execNmapCmd(nMapCmd);
+            execNmapCmd(nMapCmd, tmpIp);
         } else if ((!isPrvMode()) && !("".toString().equals(pass_sudo.getText()))) {
             String[] nMapCmd = {nmScriptPath, tmpIp, "0", pwd}; 
-            execNmapCmd(nMapCmd);
+            execNmapCmd(nMapCmd, tmpIp);
         }
     }
 
-    private void execNmapCmd(String[] nMapCmd) {
+    private void execNmapCmd(String[] nMapCmd, String tmpIp) {
         try {
             String displ_str;
 
@@ -765,7 +765,7 @@ public class GUI extends javax.swing.JFrame {
                 txtSys.append("*** nMap returned Error: " + displ_str + "\n");
             }
             int exitValue = proc.waitFor();
-            txtSys.append("* Nmap exit Value: "+ exitValue);
+            txtSys.append("* Nmap [" + tmpIp + "] exit Value is " + exitValue + "\n");
         } catch (InterruptedException | IOException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
