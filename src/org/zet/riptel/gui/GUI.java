@@ -724,7 +724,7 @@ public class GUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(jP_DBcon, "No DB connection !");
         }
     }//GEN-LAST:event_jB_DBSubmitActionPerformed
-   
+
     private void prepareNmapCmd() {
 
         /*String nmScriptPath = "/home/zet/projects/NetBeansProjects/RTL/resources/scripts/zetnm.sh";
@@ -741,7 +741,7 @@ public class GUI extends javax.swing.JFrame {
             String[] nMapCmd = {nmScriptPath, tmpIp, "-1"};
             execNmapCmd(nMapCmd, tmpIp);
         } else if ((!isPrvMode()) && !("".toString().equals(pass_sudo.getText()))) {
-            String[] nMapCmd = {nmScriptPath, tmpIp, "0", pwd}; 
+            String[] nMapCmd = {nmScriptPath, tmpIp, "0", pwd};
             execNmapCmd(nMapCmd, tmpIp);
         }
     }
@@ -795,16 +795,8 @@ public class GUI extends javax.swing.JFrame {
 
             @Override
             protected Void doInBackground() throws Exception {
-
-                String displ_str;
-                int exitValue;
-
-                String telScriptPath = getJarPath() + "/scripts/zettel.sh";
                 String tmpIp = cb_DBIPs.getSelectedItem().toString();
-
-                //String telScriptPath = "/home/zet/proj/NetBeansProjects/RTL/resources/scripts/zettel.sh";
-                //String tmpIp = "192.168.1.254";
-
+                long millis = 1000;
                 if (chb_liveTel.isSelected()) {
                     String[] execTelStr = {"gnome-terminal",
                         "-x",
@@ -814,36 +806,12 @@ public class GUI extends javax.swing.JFrame {
                     //Process procLive = Runtime.getRuntime().exec(execTelStr);
                     ProcessBuilder pb = new ProcessBuilder(execTelStr);
                     Process procLive = pb.start();
-                    //exitValue = procLive.waitFor();
-                    cancelWorker(cmdTwork);
-                    stateDBbuttons(true);
-                    return null;
-
                 } else {
-
-                    String[] execTelScriptStr = {telScriptPath, tmpIp};
-                    ProcessBuilder pb = new ProcessBuilder(execTelScriptStr);
-                    Process procApp = pb.redirectError(ProcessBuilder.Redirect.PIPE).redirectOutput(ProcessBuilder.Redirect.PIPE).start();
-
-                    BufferedReader stdIn = new BufferedReader(new InputStreamReader(procApp.getInputStream()));
-                    BufferedReader stdEr = new BufferedReader(new InputStreamReader(procApp.getErrorStream()));
-
-                    while ((displ_str = stdIn.readLine()) != null) {
-                        jTxt_telOut.append(displ_str + "\n");
-                    }
-                    while ((displ_str = stdEr.readLine()) != null) {
-                        txtSys.append("*** TelNet [" + tmpIp + "] Error: " + displ_str + "\n");
-                    }
-
-                    exitValue = procApp.waitFor();
-                    txtSys.append("** TelNet [" + tmpIp + "] exit Value is " + exitValue + "\n");
-
-                    //******** Add 60 seconds timeout then close proc
-
-                    cancelWorker(cmdTwork);
-                    stateDBbuttons(true);
-                    return null;
+                    execTelCmd(tmpIp, millis);
                 }
+                cancelWorker(cmdTwork);
+                stateDBbuttons(true);
+                return null;
             }
         }
         jTxt_telOut.setText("");
@@ -851,13 +819,70 @@ public class GUI extends javax.swing.JFrame {
         cmdTwork.execute();
     }//GEN-LAST:event_btn_TelActionPerformed
 
+    private void execTelCmd(String tmpIp, long millis) throws IOException, InterruptedException, TimeoutException {
+
+        String telScriptPath = getJarPath() + "/scripts/zettel.sh";
+        //String telScriptPath = "/home/zet/proj/NetBeansProjects/RTL/resources/scripts/zettel.sh";
+        String[] execTelScriptStr = {telScriptPath, tmpIp};
+
+        ProcessBuilder pb = new ProcessBuilder(execTelScriptStr);
+        Process procApp = pb.redirectError(ProcessBuilder.Redirect.PIPE).redirectOutput(ProcessBuilder.Redirect.PIPE).start();
+
+        Worker work = new Worker(procApp);
+        work.start();
+
+        try {
+            work.join(millis);
+            if (work.exit != null) {
+                int k = work.exit;
+            } else {
+                throw new TimeoutException();
+            }
+        } catch (InterruptedException ex) {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            Thread.currentThread().interrupt();
+            throw ex;
+        } finally {
+            procApp.destroy();
+        }
+    }
+
     private void cb_DBIPsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_DBIPsActionPerformed
         clearDBFields();
     }//GEN-LAST:event_cb_DBIPsActionPerformed
 
     /**
-     * *****************************HELPER METHODS START********************************************
+     * *****************************HELPER METHODS
+     * START********************************************
      */
+    private class Worker extends Thread {
+
+        private final Process procApp;
+        private Integer exit;
+
+        private Worker(Process procApp) {
+            this.procApp = procApp;
+        }
+
+        public void run() {
+            try {
+                BufferedReader stdIn = new BufferedReader(new InputStreamReader(procApp.getInputStream()));
+                BufferedReader stdEr = new BufferedReader(new InputStreamReader(procApp.getErrorStream()));
+                String displ_str = null;
+                while ((displ_str = stdIn.readLine()) != null) {
+                    jTxt_telOut.append(displ_str + "\n");
+                }
+                while ((displ_str = stdEr.readLine()) != null) {
+                    //txtSys.append("*** TelNet [" + tmpIp + "] Error: " + displ_str + "\n");
+                }
+                exit = procApp.waitFor();
+
+            } catch (InterruptedException | IOException ex) {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);;
+            }
+        }
+    }
+
     private void checkPrvMode() {
         String uname = System.getProperty("user.name");
         if (uname.equalsIgnoreCase("root")) {
@@ -965,7 +990,8 @@ public class GUI extends javax.swing.JFrame {
     }
 
     /**
-     * ******************************HELPER METHODS END*****************************************
+     * ******************************HELPER METHODS
+     * END*****************************************
      */
     /**
      * @param args the command line arguments
