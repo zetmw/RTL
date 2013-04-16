@@ -108,8 +108,8 @@ public class GUI extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         btn_Tel = new javax.swing.JButton();
-        lb_infoStatus = new javax.swing.JLabel();
         chb_liveTel = new javax.swing.JCheckBox();
+        lb_infoStatus = new javax.swing.JLabel();
 
         jD_DBcon.getContentPane().setLayout(new java.awt.GridLayout(1, 0));
 
@@ -354,7 +354,7 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(rdbC, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(rdbFR)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pan_controlLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {rdbA, rdbB, rdbC, rdbFR});
@@ -452,8 +452,6 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        chb_liveTel.setText("LiveTel");
-
         javax.swing.GroupLayout jP_DBcontrolLayout = new javax.swing.GroupLayout(jP_DBcontrol);
         jP_DBcontrol.setLayout(jP_DBcontrolLayout);
         jP_DBcontrolLayout.setHorizontalGroup(
@@ -461,24 +459,25 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(jP_DBcontrolLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addGroup(jP_DBcontrolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cb_DBIPs, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
+                    .addGroup(jP_DBcontrolLayout.createSequentialGroup()
+                        .addGroup(jP_DBcontrolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cb_DBIPs, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7))
+                        .addGap(18, 18, 18)
+                        .addGroup(jP_DBcontrolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTF_User, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 77, Short.MAX_VALUE)
+                        .addGroup(jP_DBcontrolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTF_Pass, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGap(59, 59, 59))
                     .addGroup(jP_DBcontrolLayout.createSequentialGroup()
                         .addComponent(jB_Nmap)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_Tel)))
-                .addGap(18, 18, 18)
-                .addGroup(jP_DBcontrolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTF_User, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
-                    .addComponent(jLabel5)
-                    .addComponent(lb_infoStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jP_DBcontrolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTF_Pass, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(chb_liveTel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jB_DBSubmit))
+                        .addComponent(btn_Tel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jB_DBSubmit))))
         );
 
         jP_DBcontrolLayout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {btn_Tel, jB_DBSubmit, jB_Nmap});
@@ -496,34 +495,45 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(jTF_User, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTF_Pass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jP_DBcontrolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jP_DBcontrolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jP_DBcontrolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jB_Nmap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jB_DBSubmit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btn_Tel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addComponent(lb_infoStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(chb_liveTel))
-                .addContainerGap())
+                .addGroup(jP_DBcontrolLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                    .addComponent(jB_Nmap, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jB_DBSubmit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btn_Tel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
 
         jP_DBcontrolLayout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btn_Tel, jB_DBSubmit, jB_Nmap});
+
+        chb_liveTel.setText("LiveTel");
 
         javax.swing.GroupLayout jP_DBEntryLayout = new javax.swing.GroupLayout(jP_DBEntry);
         jP_DBEntry.setLayout(jP_DBEntryLayout);
         jP_DBEntryLayout.setHorizontalGroup(
             jP_DBEntryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSP_telout, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jP_DBEntryLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jP_DBcontrol, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(jSP_nmap, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(jP_DBEntryLayout.createSequentialGroup()
+                .addGroup(jP_DBEntryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSP_nmap, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jP_DBEntryLayout.createSequentialGroup()
+                        .addComponent(jSP_telout, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jP_DBEntryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chb_liveTel)
+                            .addComponent(lb_infoStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jP_DBEntryLayout.setVerticalGroup(
             jP_DBEntryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jP_DBEntryLayout.createSequentialGroup()
-                .addComponent(jSP_telout, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jP_DBEntryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSP_telout, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jP_DBEntryLayout.createSequentialGroup()
+                        .addComponent(chb_liveTel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lb_infoStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSP_nmap, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -766,7 +776,9 @@ public class GUI extends javax.swing.JFrame {
         try {
             String displ_str;
 
-            Process proc = Runtime.getRuntime().exec(nMapCmd);
+            //Process proc = Runtime.getRuntime().exec(nMapCmd);
+            ProcessBuilder pb = new ProcessBuilder(nMapCmd);
+            Process proc = pb.redirectError(ProcessBuilder.Redirect.PIPE).redirectOutput(ProcessBuilder.Redirect.PIPE).start();
 
             BufferedReader stdIn = new BufferedReader(new InputStreamReader(proc.getInputStream()));
             BufferedReader stdEr = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
@@ -778,7 +790,9 @@ public class GUI extends javax.swing.JFrame {
             while ((displ_str = stdEr.readLine()) != null) {
                 txtSys.append("*** nMap returned Error: " + displ_str + "\n");
             }
-        } catch (IOException ex) {
+            int exitValue = proc.waitFor();
+            txtSys.append("* Nmap exit Value: "+ exitValue);
+        } catch (InterruptedException | IOException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -835,7 +849,7 @@ public class GUI extends javax.swing.JFrame {
 
                     String[] execTelScriptStr = {telScriptPath, tmpIp};
                     ProcessBuilder pb = new ProcessBuilder(execTelScriptStr);
-                    Process procApp = pb.start();
+                    Process procApp = pb.redirectError(ProcessBuilder.Redirect.PIPE).redirectOutput(ProcessBuilder.Redirect.PIPE).start();
 
                     BufferedReader stdIn = new BufferedReader(new InputStreamReader(procApp.getInputStream()));
                     BufferedReader stdEr = new BufferedReader(new InputStreamReader(procApp.getErrorStream()));
@@ -848,7 +862,7 @@ public class GUI extends javax.swing.JFrame {
                     }
 
                     exitValue = procApp.waitFor();
-                    txtSys.append("** TelNet [" + tmpIp + "] exit Value is " + exitValue);
+                    txtSys.append("** TelNet [" + tmpIp + "] exit Value is " + exitValue + "\n");
 
                     //******** Add 60 seconds timeout then close proc
 
