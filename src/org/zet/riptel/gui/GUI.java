@@ -762,7 +762,7 @@ public class GUI extends javax.swing.JFrame {
                 stateDBbuttons(false);
             }
             while ((displ_str = stdEr.readLine()) != null) {
-                txtSys.append("*** nMap returned Error: " + displ_str + "\n");
+                txtSys.append("*** nMap [" + tmpIp + "] returned Error: " + displ_str + "\n");
             }
             int exitValue = proc.waitFor();
             txtSys.append("* Nmap [" + tmpIp + "] exit Value is " + exitValue + "\n");
