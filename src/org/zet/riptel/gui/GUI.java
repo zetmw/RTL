@@ -628,10 +628,10 @@ public class GUI extends javax.swing.JFrame {
             @Override
             protected Void doInBackground() throws Exception {
 
-                txtSys.setText("* " + worker.getState().toString() + " @ " + getDateTime() + "\n");
-                checkPrvMode();
+                //txtSys.setText("* " + worker.getState().toString() + " @ " + getDateTime() + "\n");
+              
                 //cb_DBIPs.addItem("192.168.1.254");
-                connDB();
+                
                 int ttl, th = 0;
 
                 do {
@@ -655,6 +655,7 @@ public class GUI extends javax.swing.JFrame {
                                 db.insMain(rand.getIP(), setIPRng());
                             }
                         }
+                        rand.interrupt(); /*****************/
                     } catch (InterruptedException e) {
                         Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, e);
                         break;
@@ -697,6 +698,10 @@ public class GUI extends javax.swing.JFrame {
         //ExecutorService workerThreadPool = Executors.newFixedThreadPool(1);
         //workerThreadPool.execute(worker);
         SWMExecutor.getInstance().execute(worker);
+        
+        txtSys.setText("* " + worker.getState().toString() + " @ " + getDateTime() + "\n");
+        connDB();
+        checkPrvMode();        
 
     }//GEN-LAST:event_btnStartActionPerformed
 
