@@ -24,6 +24,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import java.util.logging.Level;
@@ -636,13 +638,14 @@ public class GUI extends javax.swing.JFrame {
 
                 do {
                     ++th;
-                    rand = new RIPT("Thread " + th);
+                    rand = new RIPT();
                     rand.setClsRng(setIPRng());
                     ttl = jS_TTL.getValue() * 1000;
                     rand.setTTL(ttl);
-                    rand.start();
+                    rand.run();
                     try {
-                        RIPT.sleep(ttl);
+                        //rand.sleep(ttl);
+                        Thread.sleep(ttl);
                         publish((String) rand.getIP());
                         //*** move to process
                         if (rand.getConStatus()) {
@@ -655,7 +658,7 @@ public class GUI extends javax.swing.JFrame {
                                 db.insMain(rand.getIP(), setIPRng());
                             }
                         }
-                        rand.interrupt(); /*****************/
+                        //rand.interrupt(); /*****************/
                     } catch (InterruptedException e) {
                         Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, e);
                         break;
@@ -664,8 +667,9 @@ public class GUI extends javax.swing.JFrame {
                         stateDBbuttons(true);
                         btnExpFile.setEnabled(true);
                     }
-                } while (!isCancelled());
-                rand.interrupt();
+                } 
+                while (!isCancelled());
+                    //rand.interrupt();
                 return null;
             }
 
@@ -679,13 +683,17 @@ public class GUI extends javax.swing.JFrame {
 
             @Override
             protected void done() {
+                worker.cancel(true); 
+                workerThreadPool.shutdownNow();
+                
                 txtSys.append("* " + worker.getState().toString() + " @ " + getDateTime() + "\n");
                 txtSys.setCaretPosition(txtSys.getText().length());
                 btnStart.setEnabled(true);
                 btnStop.setEnabled(false);
                 //btnExit.setEnabled(true);
                 jChk_DB.setEnabled(true);
-                SWMExecutor.getInstance().terminate();
+                                              
+                //SWMExecutor.getInstance().terminate();
                 try {
                     worker.get(jS_TTL.getValue(), TimeUnit.SECONDS);
                 } catch (InterruptedException | ExecutionException | TimeoutException ex) {
@@ -693,15 +701,17 @@ public class GUI extends javax.swing.JFrame {
                 }
             }
         }
-
-        worker = new Worker();
-        //ExecutorService workerThreadPool = Executors.newFixedThreadPool(1);
-        //workerThreadPool.execute(worker);
-        SWMExecutor.getInstance().execute(worker);
         
-        txtSys.setText("* " + worker.getState().toString() + " @ " + getDateTime() + "\n");
+        txtSys.setText(null);
         connDB();
-        checkPrvMode();        
+        checkPrvMode();   
+        
+        worker = new Worker();   
+        workerThreadPool.execute(worker);
+        //SWMExecutor.getInstance().execute(worker);
+        
+        txtSys.append("* " + worker.getState().toString() + " @ " + getDateTime() + "\n");
+           
 
     }//GEN-LAST:event_btnStartActionPerformed
 
@@ -792,7 +802,9 @@ public class GUI extends javax.swing.JFrame {
         }
         jTxt_nmap.setText("");
         cmdNwork = new CMDNWorker();
-        SWNExecutor.getInstance().execute(cmdNwork);
+        //SWNExecutor.getInstance().execute(cmdNwork);
+        workerThreadPool.execute(cmdNwork);
+        //nmEx.execute(cmdNwork);
     }//GEN-LAST:event_jB_NmapActionPerformed
 
     private void btn_TelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_TelActionPerformed
@@ -853,7 +865,12 @@ public class GUI extends javax.swing.JFrame {
         }
         jTxt_telOut.setText("");
         cmdTwork = new CMDTWorker();
-        cmdTwork.execute();
+        //cmdTwork.execute();
+        workerThreadPool.execute(cmdTwork);
+        //SWMExecutor.getInstance().execute(cmdTwork);
+        
+        
+        
     }//GEN-LAST:event_btn_TelActionPerformed
 
     private void cb_DBIPsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_DBIPsActionPerformed
@@ -986,14 +1003,20 @@ public class GUI extends javax.swing.JFrame {
     /**
      * ****USER DEFINED VARIABLES*******
      */
+    private ExecutorService workerThreadPool = Executors.newFixedThreadPool(5);
+    private SwingWorker worker, cmdTwork, cmdNwork, fileExpW;
+    //private SWMExecutor telEx, nmEx;
+    
+    
     private RIPT rand;
     private DB_conn db;
-    private SwingWorker worker, cmdTwork, cmdNwork, fileExpW;
+   
     private ArrayList ipList = new ArrayList();
     private int tries, nsucc;
     private float ch;
     private boolean conn2DB = false, prvMode = false;
     private String[] nMapCmd = null;
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnExpFile;
