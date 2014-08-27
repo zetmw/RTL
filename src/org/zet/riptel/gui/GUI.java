@@ -640,12 +640,12 @@ public class GUI extends javax.swing.JFrame {
                     ++th;
                     rand = new RIPT();
                     rand.setClsRng(setIPRng());
-                    ttl = jS_TTL.getValue() * 1000;
+                    ttl = jS_TTL.getValue() * 500;
                     rand.setTTL(ttl);
                     rand.run();
                     try {
                         //rand.sleep(ttl);
-                        Thread.sleep(ttl);
+                        
                         publish((String) rand.getIP());
                         //*** move to process
                         if (rand.getConStatus()) {
@@ -659,7 +659,7 @@ public class GUI extends javax.swing.JFrame {
                             }
                         }
                         //rand.interrupt(); /*****************/
-                    } catch (InterruptedException e) {
+                    } catch (Exception e) {
                         Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, e);
                         break;
                     }
@@ -781,6 +781,7 @@ public class GUI extends javax.swing.JFrame {
             }
             int exitValue = proc.waitFor();
             txtSys.append("* Nmap [" + tmpIp + "] exit Value is " + exitValue + "\n");
+            cancelWorker(cmdNwork);
         } catch (InterruptedException | IOException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -794,10 +795,15 @@ public class GUI extends javax.swing.JFrame {
 
                 prepareNmapCmd();
 
-                cancelWorker(cmdNwork);
+                //
                 stateDBbuttons(true);
 
                 return null;
+            }
+            
+            @Override
+            protected void done() {
+                cancelWorker(cmdNwork);
             }
         }
         jTxt_nmap.setText("");
