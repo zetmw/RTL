@@ -11,7 +11,7 @@ import java.net.SocketAddress;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class RIPT extends Thread {
+public class RIPT implements Runnable {
 
     private String ip;
     private boolean conStatus;
@@ -19,19 +19,12 @@ public class RIPT extends Thread {
     private int SOCK_TTL = 2000;
     private String clsRng;
 
-    public RIPT(String name) {
-        super(name);
-    }
-
     @Override
     public void run() {
-        startL();
-    }
-
-    public void startL() {
         ipRnd(getClsRng());
         doCon(getIP());
     }
+
 
     public void ipRnd(String clsRng) {
         //TODO combo box class selection
@@ -64,13 +57,14 @@ public class RIPT extends Thread {
     }
 
     public void doCon(String ipcon) {
-        try {                
+        try {   
              SocketAddress sockAdd = new InetSocketAddress(ipcon, 23);            
              socket = new Socket();
              socket.connect(sockAdd, getTTL());
+             Thread.sleep(getTTL());
              setConStatus(true);
              socket.close();                    
-        } catch (IOException ex) {
+        } catch (IOException  | InterruptedException ex) {
             setConStatus(false);
             Logger.getLogger(RIPT.class.getName()).log(Level.SEVERE, "No Connection to " + ipcon);
         }
